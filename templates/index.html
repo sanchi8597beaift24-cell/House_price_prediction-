@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- MAIN CONTAINER -->
+
+    <div class="main-container">
+
+        <!-- LEFT SECTION -->
+
+        <div class="left-section">
+
+            <!-- ANIMATION CIRCLES -->
+
+            <div class="circle one"></div>
+            <div class="circle two"></div>
+
+            <!-- LOGO -->
+
+            <div class="logo">
+                🏠 DreamHouse
+            </div>
+
+            <!-- TITLE -->
+
+            <h1>
+                House Price <br>
+                <span>Prediction</span>
+            </h1>
+
+            <!-- DESCRIPTION -->
+
+            <p>
+                Predict your dream house price using advanced
+                Machine Learning technology.
+            </p>
+
+            <!-- TAGS -->
+
+            <div class="tags">
+                <span>Accurate</span>
+                <span>Fast</span>
+                <span>Reliable</span>
+            </div>
+
+            <!-- HOUSE IMAGE -->
+
+            <div class="image-container">
+
+                <img class="house-image"
+                    src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=1200&auto=format&fit=crop"
+                    alt="Modern House">
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SECTION -->
+
+        <div class="right-section">
+
+            <div class="form-box">
+
+                <h2>Enter House Details</h2>
+
+                <form action="/predict" method="post">
+
+                    <div class="input-box">
+                        <label>📏 Area (sq ft)</label>
+                        <input type="number" name="area"
+                            placeholder="Enter area in square feet" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label>🛏 Bedrooms</label>
+                        <input type="number" name="bedrooms"
+                            placeholder="Enter number of bedrooms" required>
+                    </div>
+
+                    <div class="input-box">
+                        <label>📅 House Age</label>
+                        <input type="number" name="age"
+                            placeholder="Enter house age" required>
+                    </div>
+
+                    <button type="submit">
+                        Predict Price
+                    </button>
+
+                </form>
+
+                {% if prediction_text %}
+                <div class="result">
+                    {{ prediction_text }}
+                </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
+import os
 
 app = Flask(__name__)
 
-# Load trained model safely
-model = pickle.load(open('model.pkl', 'rb'))
+# Load model safely (important for Render)
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
+model = pickle.load(open(MODEL_PATH, "rb"))
 
 @app.route('/')
 def home():
@@ -19,7 +21,7 @@ def predict():
         bedrooms = int(request.form['bedrooms'])
         age = int(request.form['age'])
 
-        # Prepare input for model
+        # Prepare input
         features = np.array([[area, bedrooms, age]])
 
         # Prediction
@@ -37,6 +39,7 @@ def predict():
             prediction_text=f"Error: {str(e)}"
         )
 
-# IMPORTANT for Render deployment
+# Render needs this
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
